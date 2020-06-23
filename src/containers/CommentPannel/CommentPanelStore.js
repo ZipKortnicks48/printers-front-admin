@@ -22,7 +22,7 @@ class CommentPanelStore {
         this.loader=true
         let token=localStorage.getItem('token')
         let url=`req/comments/`
-        await postRequest(url,{text:this.message,req:this.id},{resolve:()=>{this.getInfo();this.loader=false},reject:this.errorCallback},token)
+        await postRequest(url,{text:this.message,req:this.id},{resolve:async()=>{await this.getInfo();this.loader=false},reject:this.errorCallback},token)
     }
     _messageChange=event=>{
         this.message=event.target.value
@@ -34,7 +34,7 @@ class CommentPanelStore {
             localStorage.removeItem('name')
             this.history.push("/")
         }
-        this.errorText = `Ошибка ${code}`
+        this.errorText = `Ошибка ${code} ${errorMessage['detail']}`
         this.errorOpen = true
         this.loader=false
     }

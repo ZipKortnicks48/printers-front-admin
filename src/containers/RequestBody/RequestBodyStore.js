@@ -21,7 +21,7 @@ class RequestBodyStore {
             localStorage.removeItem('name')
             this.history.push("/")
         }
-        this.errorText = `Ошибка получения ${code}`
+        this.errorText = `Ошибка ${code} ${errorMessage['detail']}`
         this.errorOpen = true
     }
     

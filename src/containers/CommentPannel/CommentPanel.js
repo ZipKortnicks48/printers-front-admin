@@ -33,7 +33,7 @@ class CommentPanel extends React.Component {
                             </Box>
                         </Typography>
                     </Paper>
-                    {this.store.data.map((x, index) => { return (<CommentItem key={`${index}-comment-panel`} data={x} />) })}
+                    {this.store.data.reverse().map((x, index) => { return (<CommentItem key={`${index}-comment-panel`} data={x} />) })}
                     <MessageSnackbar open={this.store.errorOpen} severity="error" onClose={this.store._errorClose} message={this.store.errorText} />
                 </Box>
             </React.Fragment>)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react'
-import { SelectComponent, RequestSearchField, DatePicker, CheckBox, TableReqItem, MessageSnackbar } from '../../components'
+import { SelectComponent, RequestSearchField, DatePicker, CheckBox, TableReqItem, MessageSnackbar, NewReqFlag } from '../../components'
 import {
     ExpansionPanelDetails, ExpansionPanelSummary, ExpansionPanel, CircularProgress, Box, Paper,
     List, FormControlLabel
@@ -8,7 +8,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { withRouter } from "react-router";
 import classNames from "./tablerequest.module.css"
-import {Pagination} from "@material-ui/lab"
+import { Pagination } from "@material-ui/lab"
 class TableRequest extends React.Component {
 
     store = this.props.TableRequestStore
@@ -17,13 +17,13 @@ class TableRequest extends React.Component {
         this.store.history = this.props.history
         this.store.getCabinets()
     }
-    _onReqClick=(id)=>{
+    _onReqClick = (id) => {
         this.props.history.push(`requests/${id}`)
     }
-    
+
     render() {
-        if (this.store.tableLoader) { return (<CircularProgress />) } else {
-            console.log(this.store.reqs,"Это заявки1, а тэбллоадер", this.store.tableLoader)
+        if (this.store.tableLoader) { return (<React.Fragment><Box height="100vh" display="flex" justifyContent="center" alignItems="center"><CircularProgress /></Box></React.Fragment>) } else {
+            console.log(this.store.reqs, "Это заявки1, а тэбллоадер", this.store.tableLoader)
             return (
                 <React.Fragment>
                     <Box mb={2}>
@@ -45,18 +45,24 @@ class TableRequest extends React.Component {
                             </Box>
                             <ExpansionPanelDetails>
                                 <DatePicker label="Укажите дату" value={this.store.date} onChange={this.store._dateChange} />
+                                <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Район" className={classNames.select} />
                                 <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Кабинет" className={classNames.select} />
-                                <CheckBox checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} className={classNames.checkbox} label="Отобразить не закрытые заявки" />
+                                <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Исполнитель" className={classNames.select} />
+                                <Box>
+                                    <CheckBox checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} className={classNames.checkbox} />
+                                    <NewReqFlag />
+                                </Box>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </Box>
                     <Paper>
                         <List component="nav" aria-label="mailbox folders">
-                            <TableReqItem onClick={this._onReqClick} items={this.store.reqs} />
+                            <TableReqItem onClickClose={this.store._sendInfo} onClick={this._onReqClick} items={this.store.reqs} />
                         </List>
                     </Paper>
                     <Pagination page={this.store.page} onChange={this.store._pageChange} count={this.store.count_pages} shape="rounded" />
-                    {/* <MessageSnackbar open={this.store.errorOpen} severity="error" onClose={this.store._errorClose} message={this.store.errorText} /> */}
+                    <MessageSnackbar open={this.store.errorOpen} severity="error" onClose={this.store._errorClose} message={this.store.errorText} />
+                    <MessageSnackbar open={this.store.successOpen} severity="success" onClose={this.store._successClose} message={this.store.successText} />
                 </React.Fragment>
             )
         }

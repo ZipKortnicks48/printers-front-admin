@@ -10,6 +10,7 @@ import TableRequestStore from './containers/TableRequest/TableRequestStore'
 import DialogCreateReqStore from './containers/DialogCreateReq/DialogCreateReqStore'
 import RequestBodyStore from './containers/RequestBody/RequestBodyStore'
 import CommentPanelStore from './containers/CommentPannel/CommentPanelStore'
+import TableReqItemStore from './components/TableReqItem/TableReqItemStore'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { green, purple } from '@material-ui/core/colors';
 const innerTheme = createMuiTheme({
@@ -22,7 +23,8 @@ const stores = {
   TableRequestStore,
   DialogCreateReqStore,
   RequestBodyStore,
-  CommentPanelStore
+  CommentPanelStore,
+  TableReqItemStore,
 }
 ReactDOM.render(
   <BrowserRouter>
