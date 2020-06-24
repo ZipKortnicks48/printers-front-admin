@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react'
-import { SelectComponent, RequestSearchField, DatePicker, CheckBox, TableReqItem, MessageSnackbar, NewReqFlag } from '../../components'
+import { SelectComponent, RequestSearchField, DatePicker, CheckBox, TableReqItem, MessageSnackbar, NewReqFlag, ProcessReqFlag, CheckoutFlag } from '../../components'
 import {
     ExpansionPanelDetails, ExpansionPanelSummary, ExpansionPanel, CircularProgress, Box, Paper,
     List, FormControlLabel
@@ -44,13 +44,22 @@ class TableRequest extends React.Component {
                                 </ExpansionPanelSummary>
                             </Box>
                             <ExpansionPanelDetails>
-                                <DatePicker label="Укажите дату" value={this.store.date} onChange={this.store._dateChange} />
-                                <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Район" className={classNames.select} />
-                                <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Кабинет" className={classNames.select} />
-                                <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Исполнитель" className={classNames.select} />
-                                <Box>
-                                    <CheckBox checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} className={classNames.checkbox} />
-                                    <NewReqFlag />
+                                <Box display="flex" flexDirection="column">
+                                    <Box display="flex">
+                                        <DatePicker label="Укажите дату" value={this.store.date} onChange={this.store._dateChange} />
+                                        <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Район" className={classNames.select} />
+                                        <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Кабинет" className={classNames.select} />
+                                        <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Исполнитель" className={classNames.select} />
+                                    </Box>
+                                    <Box display="flex" alignItems="center">
+                                        <CheckBox label={<NewReqFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
+                                        <Box mb={4}/>
+                                        <CheckBox label={<CheckoutFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
+                                        <Box mb={4}/>
+                                        <CheckBox label={<NewReqFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
+                                        <Box mb={4}/>
+                                        <CheckBox label={<CheckoutFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
+                                    </Box>
                                 </Box>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
