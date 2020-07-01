@@ -3,19 +3,20 @@ import { observer, inject } from 'mobx-react'
 import { SelectComponent, RequestSearchField, DatePicker, CheckBox, TableReqItem, MessageSnackbar, NewReqFlag, ProcessReqFlag, CheckoutFlag } from '../../components'
 import {
     ExpansionPanelDetails, ExpansionPanelSummary, ExpansionPanel, CircularProgress, Box, Paper,
-    List, FormControlLabel
+    List, FormControlLabel, Tooltip
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { withRouter } from "react-router";
 import classNames from "./tablerequest.module.css"
 import { Pagination } from "@material-ui/lab"
+import { AccessTime,CheckCircle } from "@material-ui/icons"
 class TableRequest extends React.Component {
 
     store = this.props.TableRequestStore
     componentDidMount = () => {
         console.log("Дид маунт")
         this.store.history = this.props.history
-        this.store.getCabinets()
+        this.store.getFirstData()
     }
     _onReqClick = (id) => {
         this.props.history.push(`requests/${id}`)
@@ -47,18 +48,29 @@ class TableRequest extends React.Component {
                                 <Box display="flex" flexDirection="column">
                                     <Box display="flex">
                                         <DatePicker label="Укажите дату" value={this.store.date} onChange={this.store._dateChange} />
-                                        <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Район" className={classNames.select} />
-                                        <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Кабинет" className={classNames.select} />
-                                        <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Исполнитель" className={classNames.select} />
+                                        <SelectComponent value={this.store.city} items={this.store.cities} onChange={this.store._cityChange} label="Район" className={classNames.select} />
+                                        {/* <SelectComponent value={this.store.cabinet} items={this.store.cabinets} onChange={this.store._cabinetChange} label="Кабинет" className={classNames.select} /> */}
+                                        <SelectComponent value={this.store.executor} items={this.store.executors} onChange={this.store._executorChange} label="Исполнитель" className={classNames.select} /> 
                                     </Box>
                                     <Box display="flex" alignItems="center">
-                                        <CheckBox label={<NewReqFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
-                                        <Box mb={4}/>
-                                        <CheckBox label={<CheckoutFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
-                                        <Box mb={4}/>
-                                        <CheckBox label={<NewReqFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
-                                        <Box mb={4}/>
-                                        <CheckBox label={<CheckoutFlag />} checked={this.store.showClosedRequests} onChange={this.store._showClosedRequests} />
+                                        <Box mr={4} />
+                                        <CheckBox label={<NewReqFlag />} checked={this.store.showOnlyNewRequests} onChange={this.store._showOnlyNewRequests} />
+                                        <Box mr={4} />
+                                        <CheckBox label={<CheckoutFlag />} checked={this.store.showOnlyCheckoutRequests} onChange={this.store._showOnlyCheckoutRequests} />
+                                        <Box mr={4} />
+                                        <CheckBox label={
+                                            <Tooltip title="Отобразить заявки на исполнении">
+                                                <Box mr={3} color="info.main" display="flex" edge="end" aria-label="delete">
+                                                    <AccessTime />
+                                                </Box>
+                                            </Tooltip>
+                                        } checked={this.store.showOnlyProcessRequeses} onChange={this.store._showOnlyProcessRequests} />
+                                        <Box mr={4} />
+                                        <CheckBox label={<Tooltip title="Отобразить закрытые заявки">
+                                            <Box mr={3} color="info.main" display="flex" edge="end" aria-label="delete">
+                                            <CheckCircle style={{ color: "green" }} />
+                                            </Box>
+                                        </Tooltip>} checked={this.store.showOnlyClosedRequests} onChange={this.store._showOnlyClosedRequests} />
                                     </Box>
                                 </Box>
                             </ExpansionPanelDetails>

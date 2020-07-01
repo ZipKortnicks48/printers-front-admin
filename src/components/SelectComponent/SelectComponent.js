@@ -10,7 +10,7 @@ const SelectComponent = (props) => {
             <Select value={props.value} defaultValue="" onChange={props.onChange}>
                 <MenuItem value={""}>{"Не выбрано"}</MenuItem>
                 {
-                    props.items.map((x,index) => <MenuItem  key={`${index}-select-item`} value={x['id']}>{`${x['number']} ${x['name']}`}</MenuItem>)
+                    props.items.map((x,index) => <MenuItem  key={`${index}-select-item`} value={x['id']}>{`${x['number']?x['number']:""} ${x['surname']?x['surname']:x['name']}`}</MenuItem>)
                 }
             </Select>
 
