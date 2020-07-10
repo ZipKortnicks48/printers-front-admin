@@ -4,4 +4,6 @@ import DialogCreateReq from './DialogCreateReq/DialogCreateReq'
 import RequestBody from './RequestBody/RequestBody'
 import CommentPanel from './CommentPannel/CommentPanel'
 import DialogTieExecutor from './DialogTieExecutor/DialogTieExecutor'
-export {AuthorisationForm,TableRequest,DialogCreateReq,RequestBody,CommentPanel, DialogTieExecutor}
+import PrinterPanelStore from './PrintersPanel/PrintersPanelStore'
+import PrinterPanel from './PrintersPanel/PrintersPanel' 
+export {AuthorisationForm,TableRequest,DialogCreateReq,RequestBody,PrinterPanelStore,PrinterPanel, CommentPanel, DialogTieExecutor}

@@ -12,6 +12,7 @@ import RequestBodyStore from './containers/RequestBody/RequestBodyStore'
 import CommentPanelStore from './containers/CommentPannel/CommentPanelStore'
 import TableReqItemStore from './components/TableReqItem/TableReqItemStore'
 import DialogTieExecutorStore from './containers/DialogTieExecutor/DialogTieExecutorStore'
+import PrinterPanelStore from './containers/PrintersPanel/PrintersPanelStore'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { green, purple } from '@material-ui/core/colors';
 const innerTheme = createMuiTheme({
@@ -27,6 +28,7 @@ const stores = {
   CommentPanelStore,
   TableReqItemStore,
   DialogTieExecutorStore,
+  PrinterPanelStore,
 }
 ReactDOM.render(
   <BrowserRouter>

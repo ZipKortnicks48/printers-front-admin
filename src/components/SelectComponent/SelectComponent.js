@@ -7,7 +7,7 @@ const SelectComponent = (props) => {
         <Box className={props.className}><FormControl style={{ minWidth: 120 }} spacing={3} >
 
             <InputLabel>{props.label}</InputLabel>
-            <Select value={props.value} defaultValue="" onChange={props.onChange}>
+            <Select value={props.value} defaultValue={props.defaultValue?props.defaultValue:""} onChange={props.onChange}>
                 <MenuItem value={""}>{"Не выбрано"}</MenuItem>
                 {
                     props.items.map((x,index) => <MenuItem  key={`${index}-select-item`} value={x['id']}>{`${x['number']?x['number']:""} ${x['surname']?x['surname']:x['name']}`}</MenuItem>)
