@@ -31,7 +31,7 @@ export class TableRequestStore {
     }
     _pageChange = (event, value) => {
         this.page = value
-        this.getCabinets()
+        this.getFirstData()
     }
     _executorChange = (e) => {
         this.executor = e.target.value

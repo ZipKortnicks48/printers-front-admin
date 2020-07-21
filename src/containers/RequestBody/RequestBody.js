@@ -36,11 +36,11 @@ class RequestBody extends React.Component {
 
                 </Box>
                 <Box mb={2}>
-                    <Typography variant="body1" color="textSecondary">{`Кабинет: ${this.store.data['cabinet']}`}</Typography>
+                    <Typography variant="body1" color="textSecondary">{`Кабинет: ${this.store.data['cabinet']['name']}, район ${this.store.data['cabinet']['city']['name']}`}</Typography>
                 </Box>
-                <Box mb={2}>
+                {this.store.data['deadline']!==null&&<Box mb={2}>
                     <Typography variant="body1" color="textSecondary">{`Планируемая дата выполнения: ${this.store.data['deadline']}`}</Typography>
-                </Box>
+                </Box>}
                 <Box mb={2}>
                     <Typography variant="body1" color="textSecondary">{`Номер телефона для обратной связи ${this.store.data['phone']}`}</Typography>
                 </Box>
