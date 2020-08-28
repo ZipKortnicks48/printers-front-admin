@@ -47,11 +47,12 @@ import { TableRequest } from '../../containers/index'
 import { Box, Button, Dialog } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { withRouter } from "react-router"
-import { DialogCreateReq,PrinterPanel } from "../../containers/index"
+import { DialogCreateReq,PrinterPanel, CartridgeTable,CartridgeOrderTable } from "../../containers/index"
 class RequestListPage extends React.Component {
     state = {
         modalOpen: false,
         indexTab: 0,
+        modalTableOpen:false,
     }
     _modalClose = () => {
         this.setState({ modalOpen: false })
@@ -73,6 +74,13 @@ class RequestListPage extends React.Component {
         this.setState({indexTab:index});
     };
 
+    _modalTableOpen=()=>{
+        this.setState({modalTableOpen:true})
+    }
+    _modalTableClose=()=>{
+        this.setState({modalTableOpen:false})
+    }
+
     render() {
         
         return (
@@ -88,7 +96,7 @@ class RequestListPage extends React.Component {
                     >
                         <Tab label="Заявки в ИТ-отдел" {...this.a11yProps(0)} />
                         <Tab label="Принтеры" {...this.a11yProps(1)} />
-                        <Tab label="Картриджи (в разработке)" {...this.a11yProps(2)} />
+                        <Tab label="Картриджи" {...this.a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <Box mb={4} display="flex" flexDirection="row" alignItems="center" fontSize={16} color="text.secondary">Вы вошли под пользователем:
@@ -127,11 +135,17 @@ class RequestListPage extends React.Component {
                     aria-labelledby={`full-width-tab-${this.state.indexTab}`}
                     
                 >
-                    <div style={{"color":"black"}}>Раздел будет доступен в следующих релизах.</div>
+                    <div style={{color:"black",position:'relative',display:"flex",flexDirection:"column"}}>
+                        <div style={{position:'absolute',top:20,right:20}}>
+                            <Button variant="outlined" onClick={this._modalTableOpen}>Таблица картриджей</Button>
+                        </div>
+                        {/* <CartridgeTable/> */}
+                        <Box mt={3}><CartridgeOrderTable/></Box>
+                        </div>
                 </div>
-                <Dialog open={this.state.modalOpen} onClose={this._modalClose}>
-                    <Box>
-                        <DialogCreateReq history={this.props.history} close={this._modalClose} />
+                <Dialog open={this.state.modalTableOpen} onClose={this._modalTableClose}>
+                    <Box p={4}>
+                    <CartridgeTable/> 
                     </Box>
                 </Dialog> 
 

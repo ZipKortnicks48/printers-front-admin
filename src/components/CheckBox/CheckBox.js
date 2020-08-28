@@ -11,6 +11,8 @@ const CheckBox = (props) => {
                                     onChange={props.onChange}
                                     color="primary"
                                     checked={props.checked}
+                                    value={props.value}
+                                   
                                 />
                             }
                             label={props.label}

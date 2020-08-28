@@ -31,7 +31,7 @@ export class TableRequestStore {
     }
     _pageChange = (event, value) => {
         this.page = value
-        this.getFirstData()
+        this._filterClick()
     }
     _executorChange = (e) => {
         this.executor = e.target.value
@@ -45,7 +45,7 @@ export class TableRequestStore {
     _filterClick = async () => {
         this.tableLoader = true
         this.reqs = []
-        let url = `req/admin_view/?offset=${(this.page - 1) * this.limit}&`
+        let url = `req/admin_view/?limit=${this.limit}&offset=${(this.page-1)*this.limit}&`
         if (this.searchword !== "") url = url + "search=" + this.searchword + "&"
         if (this.date !== null) url = url + "date=" + this.date + "&"
         // if (this.cabinet !== "") url = url + "cabinet=" + this.cabinet + "&"

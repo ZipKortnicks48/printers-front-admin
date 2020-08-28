@@ -64,7 +64,7 @@ class TableRequest extends React.Component {
                                                     <AccessTime />
                                                 </Box>
                                             </Tooltip>
-                                        } checked={this.store.showOnlyProcessRequeses} onChange={this.store._showOnlyProcessRequests} />
+                                        } checked={this.store.showOnlyProcessRequests} onChange={this.store._showOnlyProcessRequests} />
                                         <Box mr={4} />
                                         <CheckBox label={<Tooltip title="Отобразить закрытые заявки">
                                             <Box mr={3} color="info.main" display="flex" edge="end" aria-label="delete">
